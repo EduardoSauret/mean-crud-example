@@ -1,12 +1,10 @@
 <div class="container" id="todos"> 
 	<a ui-sref="about" class="nav-link">About</a>
 	<h2>Todo App</h2>
-
 	<form>
-		<input class="form-control create-input" placeholder="what do I need to do?"/>
+		<input class="form-control create-input" placeholder="what do I need to do?" ng-model="createTaskInput"/>
 		<button class="btn btn-success create-button">Create Task</button>
 	</form>
-
 	<table class="table table-striped">
 		<tr>
 			<th>Completed?</th>
@@ -14,8 +12,8 @@
 			<th>Actions</th>
 		</tr>
 		<tr ng-repeat="todo in todos">
-			<td><input type="checkbox"/></td>
-			<td><span class="task">{{todo.task}}</span></td>
+			<td><input type="checkbox" ng-checked="todo.isCompleted" ng-click="checkboxClick(todo)"/></td>
+			<td><span class="todos__task" ng-class="{'todos__task--completed' : todo.isCompleted}">{{todo.task}}</span></td>
 			<td>
 				<button class="btn btn-info">Edit</button>
 				<button class="btn btn-danger">Edit</button>
