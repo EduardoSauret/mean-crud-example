@@ -1,22 +1,24 @@
-var express = require ('express');
-var app = express ();
+var express = require('express');
+var app = express();
 
 var PORT = process.env.PORT || 3000;
 
 app.all('/*', function(req, res) {
-	res.send('\
+    res.send('\
 			<!DOCTYPE html>\
 			<html>\
 				<head>\
 					<title>Mean Todo App</title>\
+					<base href="/">\
 				</head>\
 				<body>\
-					<h1>Hello, this is the app</h1>\
+					<div ui-view></div>\
+					<script src="bundle.js"></script>\
 				</body>\
 			</html>\
 		');
 });
 
-app.listen(PORT, function(){
-	console.log('Server running on ' + PORT);
+app.listen(PORT, function() {
+    console.log('Server running on ' + PORT);
 });
