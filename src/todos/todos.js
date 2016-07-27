@@ -33,30 +33,13 @@ export default function($scope, todoFactory) {
         todo.isEditing = false;
     };
 
-    $scope.createTask = _.partial(todoFactory.createTask, $scope, params);
+    const {createTask, updateTask, deleteTask, watchCreateTaskInput} = todoFactory;
 
-    $scope.updateTask = todo => {  
-        todo.task = todo.updatedTask;
-        todo.isEditing = false;
-    };
+    $scope.createTask = _.partial(createTask, $scope, params);
+    $scope.updateTask = _.partial(updateTask);
+    $scope.deleteTask = _.partial(deleteTask, $scope);
+    $scope.$watch('createTaskInput', _.partial(watchCreateTaskInput, params, $scope));
 
-    $scope.deleteTask = todoToDelete => {
-        _.remove($scope.todos, todo => todo.task === todoToDelete.task);
-    };
-
-
-    $scope.$watch('createTaskInput', val => {
-        if (val && !params.createHasInput) {
-            $scope.todos.push({ task: val, isCompleted: false});
-            params.createHasInput = true;
-        } else if (val && params.createHasInput) {
-            $scope.todos[$scope.todos.length -1].task = val;
-        } else if (!val && params.createHasInput) {
-            $scope.todos.pop()
-            params.createHasInput = false;
-        }
-
-    });
 
 
 }
