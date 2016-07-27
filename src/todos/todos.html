@@ -23,13 +23,13 @@
 	                {{todo.task}}
 				</span>
 				<form ng-submit="updatedTask(todo)">
-				<input ng-if="todo.isEditing" class="form-control todos__update-input" ng-value="todo.task" ng-model="updatedTask"/>
+				<input ng-if="todo.isEditing" class="form-control todos__update-input" ng-value="todo.task" ng-model="todo.updatedTask"/>
 				</form>
             </td>
             <td>
                 <button ng-if="!todo.isEditing" class="btn btn-info" ng-click="onEditClick(todo)">Edit</button>
                 <button ng-if="!todo.isEditing" class="btn btn-danger">Delete</button>
-                <button ng-if="todo.isEditing" class="btn btn-primary">Save</button>
+                <button ng-if="todo.isEditing" class="btn btn-primary" ng-click="updateTask(todo)">Save</button>
                 <button ng-if="todo.isEditing" class="btn btn-default" ng-click="onCancelClick(todo)">Cancel</button>
             </td>
         </tr>

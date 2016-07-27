@@ -24,20 +24,22 @@ export default function($scope) {
 
     $scope.onEditClick = todo => {
         todo.isEditing = true;
-    }
+        todo.updatedTask = todo.task;
+    };
 
     $scope.onCancelClick = todo => {
         todo.isEditing = false;
-    }
+    };
 
     $scope.createTask = () => {
         params.createHasInput = false;
         $scope.createTaskInput = '';
     };
 
-    $scope.$watch('updatedTask', val => {
-
-    });
+    $scope.updateTask = todo => {  
+        todo.task = todo.updatedTask;
+        todo.isEditing = false;
+    };
 
 
     $scope.$watch('createTaskInput', val => {
