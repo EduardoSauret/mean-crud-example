@@ -5,10 +5,12 @@ export default function($scope) {
 
     $scope.todos = [{
         task: 'do dishes',
-        isCompleted: false
+        isCompleted: false,
+        isEditing: false
     }, {
         task: 'walk the dog',
-        isCompleted: true
+        isCompleted: true,
+        isEditing: false
     }];
 
     $scope.onCompletedClick = todo => {
@@ -20,10 +22,23 @@ export default function($scope) {
         } 
     };
 
+    $scope.onEditClick = todo => {
+        todo.isEditing = true;
+    }
+
+    $scope.onCancelClick = todo => {
+        todo.isEditing = false;
+    }
+
     $scope.createTask = () => {
         params.createHasInput = false;
         $scope.createTaskInput = '';
     };
+
+    $scope.$watch('updatedTask', val => {
+
+    });
+
 
     $scope.$watch('createTaskInput', val => {
         if (val && !params.createHasInput) {
