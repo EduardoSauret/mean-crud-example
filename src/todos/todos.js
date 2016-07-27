@@ -1,4 +1,6 @@
-export default function($scope) {
+import _ from 'lodash'; 
+
+export default function($scope, todoFactory) {
     let params = {
         createHasInput: false
     };
@@ -31,14 +33,15 @@ export default function($scope) {
         todo.isEditing = false;
     };
 
-    $scope.createTask = () => {
-        params.createHasInput = false;
-        $scope.createTaskInput = '';
-    };
+    $scope.createTask = _.partial(todoFactory.createTask, $scope, params);
 
     $scope.updateTask = todo => {  
         todo.task = todo.updatedTask;
         todo.isEditing = false;
+    };
+
+    $scope.deleteTask = todoToDelete => {
+        _.remove($scope.todos, todo => todo.task === todoToDelete.task);
     };
 
 
