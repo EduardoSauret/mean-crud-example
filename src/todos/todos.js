@@ -38,7 +38,7 @@ export default function($scope, todoFactory) {
     const {createTask, updateTask, deleteTask, watchCreateTaskInput} = todoFactory;
 
     $scope.createTask = _.partial(createTask, $scope, params);
-    $scope.updateTask = _.partial(updateTask);
+    $scope.updateTask = _.partial(updateTask, $scope);
     $scope.deleteTask = _.partial(deleteTask, $scope);
     $scope.$watch('createTaskInput', _.partial(watchCreateTaskInput, params, $scope));
 

@@ -24,9 +24,15 @@ const todoFactory = angular.module('app.todoFactory', [])
 //      $scope.createTaskInput = ''; 
 	}
 
-	function updateTask(todo) {
-		todo.task = todo.updatedTask;
-		todo.isEditing = false;
+	function updateTask($scope, todo) {
+		$http.put(`/todos/${todo._id}`, { task: todo.updatedTask }).success(
+			response => {
+				getTasks($scope);
+				todo.isEditing = false;
+			});
+
+		// todo.task = todo.updatedTask;
+		// todo.isEditing = false;
 	}
 
 	function deleteTask($scope, todoToDelete) {
