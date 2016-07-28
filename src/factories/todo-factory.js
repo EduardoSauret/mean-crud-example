@@ -3,10 +3,25 @@ import _ from 'lodash';
 
 const todoFactory = angular.module('app.todoFactory', [])
 
-.factory('todoFactory', () => {
+.factory('todoFactory', ($http) => {
+
+	function getTasks($scope) {
+		$http.get('/todos').success( response => {
+			$scope.todos = response.todos;
+		});
+	}
+
 	function createTask($scope, params) {
-		params.createHasInput = false;
-        $scope.createTaskInput = ''; 
+		$http.post('/todos', {
+			task: $scope.createTaskInput,
+			isCompleted: false,
+			isEditing: false,
+		}).success(response => {
+			getTasks($scope);
+			$scope.createTaskInput = '';
+		});
+// 		params.createHasInput = false;
+//      $scope.createTaskInput = ''; 
 	}
 
 	function updateTask(todo) {
@@ -36,7 +51,8 @@ const todoFactory = angular.module('app.todoFactory', [])
 		createTask,
 		updateTask,
 		deleteTask,
-		watchCreateTaskInput
+		watchCreateTaskInput,
+		getTasks
 	};
 });  
 

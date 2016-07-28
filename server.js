@@ -1,5 +1,11 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser'); 
+var routes = require('server/routes');
+
+app.use(bodyParser.json());
+
+routes(app);
 
 var PORT = process.env.PORT || 3000;
 
