@@ -30,4 +30,13 @@ router.put('/:id', function(req, res){
 	});
 });
 
+router.delete('/:id', function(req, res) {
+	var id = req.params.id;
+	Todo.remove({ _id: mongoose.Types.ObjectId(id) }, function(err) {
+		if (err) { console.log(err); }
+
+		res.send('Todo Deleted')
+	});
+});
+
 module.exports = router;
